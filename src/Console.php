@@ -447,8 +447,8 @@ class Console
 //                        echo str_repeat(chr(8), strlen($text));
 //                        $text = rtrim($data, "\n");
 //                        Console::stdout($text);
-                        $data = rtrim($data, "\n");
-                        Console::stdout("%f{$data}%n");
+                        if ($data !== "\n") $data = rtrim($data, "\n");
+                        Console::stdout("{$data}");
                     } else {
                         pcntl_signal_dispatch();
                     }
@@ -461,11 +461,12 @@ class Console
             } else {
                 while (!$done) {
                     pcntl_signal_dispatch();
-                    echo $spinner[$i];
+//                    echo $spinner[$i];
+                    Console::stdout("%f{$spinner[$i]}%n");
                     usleep($delay);
-                    Console::stdout("%f%n");
                     $i = $i === $l - 1 ? 0 : $i + 1;
                 }
+                Console::stdout("%f%n");
             }
 
             return $retval;
@@ -486,6 +487,21 @@ class Console
     {
         $buffer .= "\n";
         socket_write($socket, $buffer, strlen($buffer));
+    }
+
+    public static function writeln($socket, $buffer)
+    {
+        static::write($socket, $buffer . PHP_EOL);
+    }
+
+    public static function end($socket)
+    {
+        socket_write($socket, PHP_EOL, 1);
+    }
+
+    public static function flash($socket, $buffer)
+    {
+        static::write($socket, "%f{$buffer}%n");
     }
 }
 
