@@ -5,8 +5,8 @@ use PhpPmd\Console;
 
 Console::stdout("falsh Working ...\n");
 Console::work(function ($socket) { // socket
-    $n = 10;
-    for ($i = 0; $i <= $n; $i++) {
+    $n = 100;
+    for ($i = $n; $i >= 0; $i-=10) {
         Console::flash($socket, "[$i/$n]");
         usleep(100000);
     }

@@ -112,7 +112,7 @@ class Console
             return "\033[0m";
         }
         if ($fgcolor == 'flash') {
-            return "\033[1A\n";
+            return "\033[1A\n\033[K";
         }
         if (isset(static::$FGCOLOR[$fgcolor])) {
             $code[] = static::$FGCOLOR[$fgcolor];
@@ -485,8 +485,7 @@ class Console
 
     public static function write($socket, $buffer)
     {
-        $buffer .= "\n";
-        socket_write($socket, $buffer, strlen($buffer));
+        socket_write($socket, $buffer . PHP_EOL, strlen($buffer) + 1);
     }
 
     public static function writeln($socket, $buffer)
@@ -496,7 +495,7 @@ class Console
 
     public static function end($socket)
     {
-        socket_write($socket, PHP_EOL, 1);
+        static::write($socket, PHP_EOL);
     }
 
     public static function flash($socket, $buffer)
