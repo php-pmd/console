@@ -1,6 +1,6 @@
 {
   "name": "php-pmd/console",
-  "description": "Lightweight utility and helper classes for CLI applications(clio/clio)",
+  "description": "PHP CLI console(clio/clio)",
   "keywords": [
     "cli",
     "php",
