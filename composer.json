@@ -1,5 +1,5 @@
 {
-  "name": "php-pmd/console",
+  "name": "hippo/console",
   "description": "PHP CLI console(clio/clio)",
   "keywords": [
     "cli",
@@ -25,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "PhpPmd\\": "src"
+      "Hippo\\Console\\": "src"
     }
   }
 }

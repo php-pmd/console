@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpPmd;
+namespace Hippo\Console;
 /**
  * This file is part of clio/clio.
  *
